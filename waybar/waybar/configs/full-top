@@ -1,0 +1,79 @@
+{
+    "include": [
+        "$HOME/.config/waybar/modules/modules-main.jsonc",
+        "$HOME/.config/waybar/modules/modules-groups.jsonc",
+        "$HOME/.config/waybar/modules/modules-custom.jsonc",
+    ],
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "reload_style_on_change": true,
+    "height": 20,
+    "margin-top": 5,
+    "margin-left": 5,
+    "margin-right": 5,
+
+    "modules-left": [
+        "custom/launch_rofi", 
+        "tray", 
+        "hyprland/workspaces", 
+        "custom/weather",
+        "mpris" 
+    ],
+
+    "modules-center": [
+        "clock"
+    ],
+
+    "modules-right": [
+        "custom/updater", 
+        "pulseaudio", 
+        "pulseaudio#microphone", 
+        "group/sysinfo", 
+        "idle_inhibitor", 
+        "custom/nightlight", 
+        "custom/clipboard", 
+        "battery", 
+        "backlight",  
+        "group/network", 
+        "custom/power_btn"
+    ],
+
+ "hyprland/workspaces": {
+    "format": "{windows}",
+   "format-window-separator": " ",
+    "default-icon": "",
+    "persistent-workspaces": [1, 2, 3, 4, 5],
+    "window-rewrite": {      
+        "title<.*youtube.*>": "",
+        "class<firefox>": "",
+        "class<firefox> title<.*Github.*>": "",
+        "class<firefox> title<.*facebook.*>": "",
+        "class<firefox> title<.*Whatsapp.*>": "",
+        "class<firefox> title<.*Home / X.*>": "",
+        "class<firefox> title<.*Twitch.*>": "",
+        "title<.*nvim.*>": "",
+        "title<.*zen.*>": "",
+        "class<zen> title<.*Github.*>": "",  
+        "class<zen> title<.*facebook.*>": "",  
+        "class<zen> title<.*Whatsapp.*>": "",  
+        "class<zen> title<.*Home / X.*>": "",  
+        "class<zen> title<.*Twitch.*>": "",  
+        "title<.*ncspot.*>": "",
+        "title<.*yazi.*>": "",
+        "class<com.mitchellh.ghostty>": "",
+        "code": "󰨞",
+        "class<discord>": "",
+        "class<Surfshark>": "󱢺",
+        "class<mpv>": "", 
+        "class<org.kde.dolphin>": "󱢴",
+        "class<org.kde.gwenview>": "",
+        "class<Spotify>": "",
+        "title<.* - (.*) - VSCodium>": "codium $1"
+    }
+  },
+
+}
