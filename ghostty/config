@@ -3,10 +3,10 @@ theme = tokyonight_night
 # window-width=110
 
 
-font-family="Iosevka Mono"
+font-family="Hack Nerd Font"
 font-size=10
 
-background-opacity = 0.87
+background-opacity = 0.70
 background-blur-radius = 80
 window-decoration = false
 window-save-state = never

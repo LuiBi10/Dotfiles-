@@ -2,8 +2,14 @@ return {
   "neovim/nvim-lspconfig",
   opts = {
     servers = {
+      marksman = {
+        cmd = { "/run/current-system/sw/bin/marksman" },
+        filetypes = { "markdown" },
+        root_dir = require("lspconfig.util").root_pattern(".git", "."),
+        single_file_support = true,
+      },
       lua_ls = {
-        cmd = { "lua-language-server" }, -- usa el binario del sistema
+        cmd = { "/run/current-system/sw/bin/lua-language-server" },
         settings = {
           Lua = {
             diagnostics = {

@@ -57,7 +57,7 @@ return {
         },
       },
       picker = {
-        -- Enable image preview for Snacks picker
+        enabled = true,
       },
     },
   },
@@ -82,20 +82,20 @@ return {
 
   -- Plugin: zen-mode.nvim
   -- URL: https://github.com/folke/zen-mode.nvim
-  {
-    "folke/zen-mode.nvim",
-    cmd = "ZenMode",
-    opts = {
-      plugins = {
-        gitsigns = true,
-        tmux = true,
-        kitty = { enabled = false, font = "+2" },
-        twilight = { enabled = true },
-      },
-    },
-    keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
-  },
-
+  -- {
+  --   "folke/zen-mode.nvim",
+  --   cmd = "ZenMode",
+  --   opts = {
+  --     plugins = {
+  --       gitsigns = true,
+  --       tmux = true,
+  --       kitty = { enabled = false, font = "+2" },
+  --       twilight = { enabled = true },
+  --     },
+  --   },
+  --   keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
+  -- },
+  --
   -- Plugin: nvim-docs-view
   -- URL: https://github.com/amrbashir/nvim-docs-view
   {
@@ -116,7 +116,7 @@ return {
     requires = { "nvim-tree/nvim-web-devicons", opt = true },
     opts = {
       options = {
-        theme = "catppuccin",
+        theme = "tokyonight",
         icons_enabled = true,
       },
       sections = {

@@ -3,7 +3,8 @@ return {
   opts = {
     servers = {
       marksman = {
-        cmd = { "marksman" }, -- usa el binario del sistema
+        -- 🔒 usa la ruta exacta del binario instalado por Nix
+        cmd = { "/run/current-system/sw/bin/marksman" },
         filetypes = { "markdown" },
         root_dir = require("lspconfig.util").root_pattern(".git", "."),
         single_file_support = true,

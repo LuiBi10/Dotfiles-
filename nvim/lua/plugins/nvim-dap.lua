@@ -22,22 +22,134 @@ return {
         "theHamsta/nvim-dap-virtual-text",
         opts = {}, -- Default options
       },
-
-      -- Plugin: nvim-dap-python
-      -- URL: https://github.com/mfussenegger/nvim-dap-python
-      -- Description: Python adapter for nvim-dap.
-      {
-        "mfussenegger/nvim-dap-python",
-      },
     },
 
     -- Keybindings for nvim-dap
-    keys = { ... }, -- Keeping existing keybindings unchanged
+    keys = {
+      { "<leader>d", "", desc = "+debug", mode = { "n", "v" } }, -- Group for debug commands
+      {
+        "<leader>dB",
+        function()
+          require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+        end,
+        desc = "Breakpoint Condition",
+      },
+      {
+        "<leader>db",
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+        desc = "Toggle Breakpoint",
+      },
+      {
+        "<leader>dc",
+        function()
+          require("dap").continue()
+        end,
+        desc = "Continue",
+      },
+      {
+        "<leader>da",
+        function()
+          require("dap").continue({ before = get_args })
+        end,
+        desc = "Run with Args",
+      },
+      {
+        "<leader>dC",
+        function()
+          require("dap").run_to_cursor()
+        end,
+        desc = "Run to Cursor",
+      },
+      {
+        "<leader>dg",
+        function()
+          require("dap").goto_()
+        end,
+        desc = "Go to Line (No Execute)",
+      },
+      {
+        "<leader>di",
+        function()
+          require("dap").step_into()
+        end,
+        desc = "Step Into",
+      },
+      {
+        "<leader>dj",
+        function()
+          require("dap").down()
+        end,
+        desc = "Down",
+      },
+      {
+        "<leader>dk",
+        function()
+          require("dap").up()
+        end,
+        desc = "Up",
+      },
+      {
+        "<leader>dl",
+        function()
+          require("dap").run_last()
+        end,
+        desc = "Run Last",
+      },
+      {
+        "<leader>do",
+        function()
+          require("dap").step_out()
+        end,
+        desc = "Step Out",
+      },
+      {
+        "<leader>dO",
+        function()
+          require("dap").step_over()
+        end,
+        desc = "Step Over",
+      },
+      {
+        "<leader>dp",
+        function()
+          require("dap").pause()
+        end,
+        desc = "Pause",
+      },
+      {
+        "<leader>dr",
+        function()
+          require("dap").repl.toggle()
+        end,
+        desc = "Toggle REPL",
+      },
+      {
+        "<leader>ds",
+        function()
+          require("dap").session()
+        end,
+        desc = "Session",
+      },
+      {
+        "<leader>dt",
+        function()
+          require("dap").terminate()
+        end,
+        desc = "Terminate",
+      },
+      {
+        "<leader>dw",
+        function()
+          require("dap.ui.widgets").hover()
+        end,
+        desc = "Widgets",
+      },
+    },
 
     config = function()
       local dap = require("dap")
-      local dap_python = require("dap-python")
-      local dapui = require("dapui")
 
       -- Load mason-nvim-dap if available
       if LazyVim.has("mason-nvim-dap.nvim") then
@@ -63,6 +175,7 @@ return {
         return vim.json.decode(json.json_strip_comments(str))
       end
 
+      -- Load launch configurations from .vscode/launch.json if it exists
       if vim.fn.filereadable(".vscode/launch.json") then
         vscode.load_launchjs()
       end
@@ -74,6 +187,7 @@ return {
           variables[k] = v
         end
 
+        -- Load variables from .env file manually
         local env_file_path = vim.fn.getcwd() .. "/.env"
         local env_file = io.open(env_file_path, "r")
         if env_file then
@@ -89,20 +203,9 @@ return {
         return variables
       end
 
-      -- Python DAP Configuration using nvim-dap-python
-      dap_python.setup("python") -- Adjust this if using a virtualenv
-
-      -- Ensure dap-ui remains open when debugging starts and does not close on termination
-      dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated["dapui_config"] = function()
-        -- Commented out to keep dap-ui open
-        -- dapui.close()
-      end
-      dap.listeners.before.event_exited["dapui_config"] = function()
-        -- Commented out to keep dap-ui open
-        -- dapui.close()
+      -- Add the env property to each existing Go configuration
+      for _, config in pairs(dap.configurations.go or {}) do
+        config.env = load_env_variables
       end
     end,
   },
