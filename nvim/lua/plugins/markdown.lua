@@ -1,6 +1,6 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
-  dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
+  dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
   ---@module 'render-markdown'
   ---@type render.md.UserConfig
   opts = {
@@ -19,12 +19,11 @@ return {
     },
   },
   config = function()
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "markdown",
-      callback = function()
-        vim.opt_local.colorcolumn = "80"
-      end,
-    })
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+    vim.opt_local.colorcolumn = "80"
+    end,
+  })
   end,
 }
-

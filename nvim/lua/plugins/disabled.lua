@@ -15,8 +15,5 @@ return {
   --   "iamcco/markdown-preview.nvim",
   --   enabled = false, -- Disable this plugin
   -- },
-  {
-    "ibhagwan/fzf-lua",
-    enabled = true,
-  },
+
 }
